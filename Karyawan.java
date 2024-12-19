@@ -1,37 +1,16 @@
-// Karyawan.java
-
 public class Karyawan {
-    private String id;
-    private String namaKaryawan;
-    private String jabatan;
+    String id;
+    String nama;
+    String jabatan;
 
-    public Karyawan(String id, String namaKaryawan, String jabatan) {
+    public Karyawan(String id, String nama, String jabatan) {
         this.id = id;
-        this.namaKaryawan = namaKaryawan;
+        this.nama = nama;
         this.jabatan = jabatan;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getNamaKaryawan() {
-        return namaKaryawan;
-    }
-
-    public void setNamaKaryawan(String namaKaryawan) {
-        this.namaKaryawan = namaKaryawan;
-    }
-
-    public String getJabatan() {
-        return jabatan;
-    }
-
-    public void setJabatan(String jabatan) {
-        this.jabatan = jabatan;
+    @Override
+    public String toString() {
+        return "ID Karyawan: " + id + ", Nama: " + nama + ", Jabatan: " + jabatan;
     }
 }
