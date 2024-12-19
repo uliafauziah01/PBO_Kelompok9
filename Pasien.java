@@ -1,34 +1,18 @@
 public class Pasien {
-    private String idPasien;
-    private String namaPasien;
-    private String alamatPasien;
-    private String penyakit;
+    String id;
+    String nama;
+    String penyakit;
+    String alamat;
 
-    public Pasien(String idPasien, String namaPasien, String alamatPasien, String penyakit) {
-        this.idPasien = idPasien;
-        this.namaPasien = namaPasien;
-        this.alamatPasien = alamatPasien;
+    public Pasien(String id, String nama, String penyakit, String alamat) {
+        this.id = id;
+        this.nama = nama;
         this.penyakit = penyakit;
-    }
-
-    public String getIdPasien() {
-        return idPasien;
-    }
-
-    public String getNamaPasien() {
-        return namaPasien;
-    }
-
-    public String getAlamatPasien() {
-        return alamatPasien;
-    }
-
-    public String getPenyakit() {
-        return penyakit;
+        this.alamat = alamat;
     }
 
     @Override
     public String toString() {
-        return "ID Pasien: " + idPasien + ", Nama: " + namaPasien + ", Penyakit: " + penyakit;
+        return "ID Pasien: " + id + ", Nama: " + nama + ", Penyakit: " + penyakit;
     }
 }
