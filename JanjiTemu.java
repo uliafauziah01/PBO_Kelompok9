@@ -1,25 +1,21 @@
 public class JanjiTemu {
     private Pasien pasien;
-    private Doctor dokter;
-    private Karyawan karyawan;
+    private Dokter dokter;
     private String penyakit;
+    private Karyawan petugas;
 
-    public JanjiTemu(Pasien pasien, Doctor dokter, Karyawan karyawan, String penyakit) {
+    public JanjiTemu(Pasien pasien, Dokter dokter, String penyakit, Karyawan petugas) {
         this.pasien = pasien;
         this.dokter = dokter;
-        this.karyawan = karyawan;
         this.penyakit = penyakit;
+        this.petugas = petugas;
     }
 
-    public void tampilkanInfoJanjiTemu() {
-        if (pasien != null && dokter != null && karyawan != null) {
-            System.out.println("Pasien: " + pasien.getNamaPasien());
-            System.out.println("Dokter: " + dokter.getNama());
-            System.out.println("Penyakit: " + penyakit);
-            System.out.println("Jadwal Praktek: " + dokter.getJadwalPraktek());
-            System.out.println("Dijadwalkan oleh: " + karyawan.getNamaKaryawan());
-        } else {
-            System.out.println("Informasi pasien, dokter, atau karyawan belum lengkap.");
-        }
+    @Override
+    public String toString() {
+        return "Rincian:\n" +
+               "ID Pasien: " + pasien.id + "\nNama: " + pasien.nama + "\nPenyakit: " + penyakit +
+               "\nKode Dokter: " + dokter.id + "\nNama Dokter: " + dokter.nama + "\nSpesialisasi: " + dokter.spesialisasi +
+               "\nJadwal Praktek: " + dokter.jadwalPraktek + "\nPetugas: ID " + petugas.id + ", " + petugas.nama + ", Jabatan: " + petugas.jabatan;
     }
 }
