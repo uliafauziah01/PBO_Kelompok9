@@ -1,14 +1,14 @@
 public class Rujukan {
-    private String jenisPenyakit;
-    private String spesialisasi;
+    private Pasien pasien;
+    private Dokter dokter;
 
-    public Rujukan(String jenisPenyakit, String spesialisasi) {
-        this.jenisPenyakit = jenisPenyakit;
-        this.spesialisasi = spesialisasi;
+    public Rujukan(Pasien pasien, Dokter dokter) {
+        this.pasien = pasien;
+        this.dokter = dokter;
     }
 
-    public void cetakRujukan() {
-        System.out.println("Rujukan untuk penyakit: " + jenisPenyakit);
-        System.out.println("Ke Spesialis: " + spesialisasi);
+    @Override
+    public String toString() {
+        return "Rujukan: \n" + pasien + "\nKe Dokter: " + dokter;
     }
 }
