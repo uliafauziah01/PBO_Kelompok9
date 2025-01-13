@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class SistemManajemenKlinik { 
+public class SistemManajemenKlinik {
     private List<Pasien> daftarPasien;
     private List<Dokter> daftarDokter;
     private List<Karyawan> daftarKaryawan;
@@ -27,18 +27,43 @@ public class SistemManajemenKlinik {
     private void tambahDataAwal() {
         daftarKaryawan.add(new Karyawan("K1", "Siti", "Administrasi"));
         daftarKaryawan.add(new Karyawan("K2", "Ali", "Petugas Registrasi"));
-
+    
         Map<String, String> jadwalDokter1 = new HashMap<>();
         jadwalDokter1.put("Senin", "08:00 - 12:00");
         jadwalDokter1.put("Selasa", "13:00 - 17:00");
         daftarDokter.add(new Dokter("D1", "Dr. Ardi", "Umum", jadwalDokter1));
-
+    
         Map<String, String> jadwalDokter2 = new HashMap<>();
         jadwalDokter2.put("Senin", "08:00 - 12:00");
         daftarDokter.add(new Dokter("D2", "Dr. Budi", "Spesialis Anak", jadwalDokter2));
-
+    
+        Map<String, String> jadwalDokter3 = new HashMap<>();
+        jadwalDokter3.put("Rabu", "08:00 - 12:00");
+        jadwalDokter3.put("Jumat", "13:00 - 17:00");
+        daftarDokter.add(new Dokter("D3", "Dr. Citra", "Spesialis Anak", jadwalDokter3));
+    
+        Map<String, String> jadwalDokter4 = new HashMap<>();
+        jadwalDokter4.put("Rabu", "08:00 - 12:00");
+        jadwalDokter4.put("Kamis", "13:00 - 17:00");
+        daftarDokter.add(new Dokter("D4", "Dr. Dinda", "THT", jadwalDokter4));
+    
+        Map<String, String> jadwalDokter5 = new HashMap<>();
+        jadwalDokter5.put("Kamis", "08:00 - 12:00");
+        jadwalDokter5.put("Jumat", "13:00 - 17:00");
+        daftarDokter.add(new Dokter("D5", "Dr. Rini", "Spesialis Kulit", jadwalDokter5));
+    
+        Map<String, String> jadwalDokter6 = new HashMap<>();
+        jadwalDokter6.put("Senin", "08:00 - 12:00");
+        jadwalDokter6.put("Kamis", "13:00 - 17:00");
+        daftarDokter.add(new Dokter("D6", "Dr. Endah", "Spesialis Gigi", jadwalDokter6));
+    
         daftarStokObat.add(new StokObat("Paracetamol", 7500, 100));
-    }
+        daftarStokObat.add(new StokObat("Ibuprofen", 12000, 150));
+        daftarStokObat.add(new StokObat("Amoxicillin", 25000, 200));
+        daftarStokObat.add(new StokObat("Captopril", 10000, 50));
+        daftarStokObat.add(new StokObat("Metformin", 15000, 120));
+        daftarStokObat.add(new StokObat("Aspirin", 8000, 180));
+    }    
 
     public void start() {
         while (true) {
