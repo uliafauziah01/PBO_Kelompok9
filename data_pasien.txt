@@ -1,0 +1,1 @@
+Pasien{id='P1', nama='sally', alamat='Sidikan 51', penyakit='demam', usia=20}
