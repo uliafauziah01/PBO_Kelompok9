@@ -1,4 +1,4 @@
-public class PendapatanKlinik {
+public class PendapatanKlinik { 
     private double pendapatan;
 
     public PendapatanKlinik() {
