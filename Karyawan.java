@@ -1,16 +1,17 @@
-public class Karyawan {
-    String id;
-    String nama;
-    String jabatan;
+public class Karyawan extends Person {
+    private String jabatan;
 
     public Karyawan(String id, String nama, String jabatan) {
-        this.id = id;
-        this.nama = nama;
+        super(id, nama); 
         this.jabatan = jabatan;
+    }
+
+    public String getJabatan() {
+        return jabatan;
     }
 
     @Override
     public String toString() {
-        return "ID Karyawan: " + id + ", Nama: " + nama + ", Jabatan: " + jabatan;
+        return super.toString() + ", Jabatan: " + jabatan;
     }
 }
