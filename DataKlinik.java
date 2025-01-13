@@ -19,4 +19,4 @@ public class DataKlinik implements FileManager {
     public void simpanDataPasien(Pasien pasien) throws IOException {
         simpanData(FILE_PATH, List.of(pasien.toString()));
     }
-}
+} 
