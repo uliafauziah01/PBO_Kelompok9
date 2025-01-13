@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class SistemManajemenKlinik {
+public class SistemManajemenKlinik { 
     private List<Pasien> daftarPasien;
     private List<Dokter> daftarDokter;
     private List<Karyawan> daftarKaryawan;
