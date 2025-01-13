@@ -1,4 +1,4 @@
-public class Person {
+public abstract class Person {
     private String id;
     private String nama;
 
@@ -14,6 +14,8 @@ public class Person {
     public String getNama() {
         return nama;
     }
+
+    public abstract void displayInfo();
 
     @Override
     public String toString() {
