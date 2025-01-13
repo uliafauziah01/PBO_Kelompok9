@@ -1,5 +1,5 @@
 public class Pasien {
-    private static int counter = 1; // Counter untuk ID
+    private static int counter = 1; 
     private String id;
     private String nama;
     private String alamat;
