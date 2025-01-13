@@ -1,14 +1,22 @@
 public class Person {
-    protected String id;
-    protected String nama;
+    private String id;
+    private String nama;
 
     public Person(String id, String nama) {
         this.id = id;
         this.nama = nama;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
     @Override
     public String toString() {
-        return this.id + ", " + this.nama;
+        return "ID: " + id + ", Nama: " + nama;
     }
 }
