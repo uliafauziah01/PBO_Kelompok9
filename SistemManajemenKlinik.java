@@ -1,126 +1,146 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class SistemManajemenKlinik {
-    private static ArrayList<Dokter> daftarDokter = new ArrayList<>();
-    private static ArrayList<Pasien> daftarPasien = new ArrayList<>();
-    private static ArrayList<Karyawan> daftarKaryawan = new ArrayList<>();
-    private static ArrayList<JanjiTemu> daftarJanjiTemu = new ArrayList<>();
-    private static Scanner scanner = new Scanner(System.in);
+    private List<Pasien> daftarPasien;
+    private List<Dokter> daftarDokter;
+    private List<Karyawan> daftarKaryawan;
+    private List<JanjiTemu> daftarJanjiTemu;
+    private List<StokObat> daftarStokObat;
+    private List<ResepObat> daftarResepObat;
+    private Scanner scanner;
 
-    public static void main(String[] args) {
-        daftarDokter.add(new Dokter("D1", "Dr. Andi", "Umum", "Senin, Rabu"));
-        daftarDokter.add(new Dokter("D2", "Dr. Budi", "Spesialis Bedah", "Selasa, Kamis"));
-        
+    public SistemManajemenKlinik() {
+        daftarPasien = new ArrayList<>();
+        daftarDokter = new ArrayList<>();
+        daftarKaryawan = new ArrayList<>();
+        daftarJanjiTemu = new ArrayList<>();
+        daftarStokObat = new ArrayList<>();
+        daftarResepObat = new ArrayList<>();
+        scanner = new Scanner(System.in);
+        tambahDataAwal();
+    }
+
+    private void tambahDataAwal() {
         daftarKaryawan.add(new Karyawan("K1", "Siti", "Administrasi"));
         daftarKaryawan.add(new Karyawan("K2", "Ali", "Petugas Registrasi"));
 
-        int pilihan;
-        do {
+        Map<String, String> jadwalDokter1 = new HashMap<>();
+        jadwalDokter1.put("Senin", "08:00 - 12:00");
+        jadwalDokter1.put("Selasa", "13:00 - 17:00");
+        daftarDokter.add(new Dokter("D1", "Dr. Ardi", "Umum", jadwalDokter1));
+
+        Map<String, String> jadwalDokter2 = new HashMap<>();
+        jadwalDokter2.put("Senin", "08:00 - 12:00");
+        daftarDokter.add(new Dokter("D2", "Dr. Budi", "Spesialis Anak", jadwalDokter2));
+
+        daftarStokObat.add(new StokObat("Paracetamol", 7500, 100));
+    }
+
+    public void start() {
+        while (true) {
             System.out.println("=== Sistem Manajemen Klinik ===");
-            System.out.println("1. Pilih Dokter");
-            System.out.println("2. Input Data Pasien");
-            System.out.println("3. Lihat Semua Dokter");
-            System.out.println("4. Lihat Semua Pasien");
-            System.out.println("5. Buat Janji Temu");
-            System.out.println("6. Lihat Semua Karyawan");
+            System.out.println("1. Input Data Pasien");
+            System.out.println("2. Lihat Semua Dokter");
+            System.out.println("3. Lihat Semua Pasien");
+            System.out.println("4. Buat Janji Temu");
+            System.out.println("5. Lihat Semua Karyawan");
+            System.out.println("6. Lihat Semua Stok Obat");
+            System.out.println("7. Tambah Stok Obat");
+            System.out.println("8. Buat Resep Obat");
+            System.out.println("9. Pembayaran");
             System.out.println("0. Keluar");
             System.out.print("Pilih menu: ");
-            pilihan = scanner.nextInt();
-            scanner.nextLine(); 
+            int pilihan = scanner.nextInt();
+            scanner.nextLine();
 
             switch (pilihan) {
                 case 1:
-                    pilihDokter();
-                    break;
-                case 2:
                     inputDataPasien();
                     break;
-                case 3:
+                case 2:
                     lihatSemuaDokter();
                     break;
-                case 4:
+                case 3:
                     lihatSemuaPasien();
                     break;
-                case 5:
+                case 4:
                     buatJanjiTemu();
                     break;
-                case 6:
+                case 5:
                     lihatSemuaKaryawan();
+                    break;
+                case 6:
+                    lihatSemuaStokObat();
+                    break;
+                case 7:
+                    tambahStokObat();
+                    break;
+                case 8:
+                    buatResepObat();
+                    break;
+                case 9:
+                    pembayaran();
                     break;
                 case 0:
                     System.out.println("Program selesai, terima kasih.");
-                    break;
+                    return;
                 default:
-                    System.out.println("Pilihan tidak valid.");
-            }
-        } while (pilihan != 0);
-    }
-
-    private static void pilihDokter() {
-        System.out.println("\n=== Pilih Dokter ===");
-        System.out.println("1. Dokter Umum");
-        System.out.println("2. Dokter Spesialis");
-        System.out.print("Pilih jenis dokter: ");
-        int jenisDokter = scanner.nextInt();
-        scanner.nextLine(); // consume the newline
-
-        if (jenisDokter == 1) {
-            System.out.println("\n=== Dokter Umum ===");
-        } else if (jenisDokter == 2) {
-            System.out.println("\n=== Dokter Spesialis ===");
-        }
-
-        for (Dokter dokter : daftarDokter) {
-            System.out.println(dokter);
-        }
-
-        System.out.print("\nMasukkan kode dokter yang ingin dipilih: ");
-        String kodeDokter = scanner.nextLine();
-
-        for (Dokter dokter : daftarDokter) {
-            if (dokter.id.equals(kodeDokter)) {
-                System.out.println("\nDokter yang dipilih: \n" + dokter);
-                return;
+                    System.out.println("Pilihan tidak valid. Silahkan coba lagi.");
             }
         }
-        System.out.println("Dokter tidak ditemukan.");
     }
 
-    private static void inputDataPasien() {
+    private void inputDataPasien() {
         System.out.println("\n=== Input Data Pasien ===");
         System.out.print("Nama Pasien: ");
         String namaPasien = scanner.nextLine();
         System.out.print("Alamat Pasien: ");
         String alamatPasien = scanner.nextLine();
         System.out.print("Penyakit: ");
-        String penyakit = scanner.nextLine();
-
-        Pasien pasien = new Pasien("P" + (daftarPasien.size() + 1), namaPasien, penyakit, alamatPasien);
+        String penyakitPasien = scanner.nextLine();
+        System.out.print("Usia: ");
+        int usiaPasien = scanner.nextInt();
+        scanner.nextLine();
+    
+        Pasien pasien = new Pasien(namaPasien, alamatPasien, penyakitPasien, usiaPasien);
         daftarPasien.add(pasien);
-
-        System.out.println("Data pasien berhasil ditambahkan.");
-        System.out.println("Pengobatan\n" + "D1, Dr. Ardi, Spesialisasi umum\nResep Obat: paracetamol");
-        System.out.println("\nPembayaran\nData pasien:\n" + pasien);
-        System.out.println("\nDoktor:\nD1, Dr. Ardi, Spesialisasi umum\nResep obat: paracetamol\nHarga: 10000");
-        System.out.println("\nPetugas: ID K1, Siti\nJabatan: Administrasi");
+        System.out.println("Data pasien berhasil ditambahkan. ID Pasien: " + pasien.getId());
     }
 
-    private static void lihatSemuaDokter() {
-        System.out.println("\n=== Semua Dokter ===");
+    private void lihatSemuaDokter() {
+        System.out.println("\n=== Daftar Dokter ===");
         for (Dokter dokter : daftarDokter) {
             System.out.println(dokter);
         }
     }
 
-    private static void lihatSemuaPasien() {
-        System.out.println("\n=== Semua Pasien ===");
+    private void lihatSemuaPasien() {
+        System.out.println("\n=== Data Pasien ===");
         for (Pasien pasien : daftarPasien) {
             System.out.println(pasien);
         }
     }
 
-    private static void buatJanjiTemu() {
+    private void buatJanjiTemu() {
+        System.out.println("\n=== Formulir Janji Temu ===");
+        System.out.print("Petugas: ");
+        String petugasName = scanner.nextLine();
+        Karyawan petugas = null;
+        for (Karyawan karyawan : daftarKaryawan) {
+            if (karyawan.getNama().equalsIgnoreCase(petugasName)) {
+                petugas = karyawan;
+                break;
+            }
+        }
+        if (petugas == null) {
+            System.out.println("Petugas tidak ditemukan.");
+            return;
+        }
+
         System.out.println("\n=== Semua Pasien ===");
         for (Pasien pasien : daftarPasien) {
             System.out.println(pasien);
@@ -128,10 +148,9 @@ public class SistemManajemenKlinik {
 
         System.out.print("\nPilih ID Pasien: ");
         String idPasien = scanner.nextLine();
-
         Pasien pasienDipilih = null;
         for (Pasien pasien : daftarPasien) {
-            if (pasien.id.equals(idPasien)) {
+            if (pasien.getId().equals(idPasien)) {
                 pasienDipilih = pasien;
                 break;
             }
@@ -142,17 +161,16 @@ public class SistemManajemenKlinik {
             return;
         }
 
-        System.out.println("\n=== Semua Dokter ===");
+        System.out.println("\n=== Daftar Dokter ===");
         for (Dokter dokter : daftarDokter) {
             System.out.println(dokter);
         }
 
         System.out.print("\nPilih Kode Dokter: ");
         String kodeDokter = scanner.nextLine();
-
         Dokter dokterDipilih = null;
         for (Dokter dokter : daftarDokter) {
-            if (dokter.id.equals(kodeDokter)) {
+            if (dokter.getId().equals(kodeDokter)) {
                 dokterDipilih = dokter;
                 break;
             }
@@ -163,21 +181,192 @@ public class SistemManajemenKlinik {
             return;
         }
 
-        System.out.print("\nMasukkan penyakit: ");
-        String penyakit = scanner.nextLine();
+        System.out.print("Pilih Hari: ");
+        String hariPraktek = scanner.nextLine();
 
-        Karyawan petugas = daftarKaryawan.get(1); 
-
-        JanjiTemu janjiTemu = new JanjiTemu(pasienDipilih, dokterDipilih, penyakit, petugas);
+        JanjiTemu janjiTemu = new JanjiTemu(pasienDipilih, dokterDipilih, pasienDipilih.getPenyakit(), petugas, hariPraktek);
         daftarJanjiTemu.add(janjiTemu);
-
-        System.out.println("Janji temu berhasil dibuat.\n" + janjiTemu);
+        System.out.println("Janji temu berhasil dibuat.");
     }
 
-    private static void lihatSemuaKaryawan() {
+    private void lihatSemuaKaryawan() {
         System.out.println("\n=== Semua Karyawan ===");
         for (Karyawan karyawan : daftarKaryawan) {
             System.out.println(karyawan);
         }
+    }
+
+    private void lihatSemuaStokObat() {
+        System.out.println("\n=== Semua Stok Obat ===");
+        for (StokObat stokObat : daftarStokObat) {
+            System.out.println(stokObat);
+        }
+    }
+
+    private void tambahStokObat() {
+        System.out.println("\n=== Tambah Stok Obat ===");
+        System.out.print("Nama Obat: ");
+        String namaObat = scanner.nextLine();
+        System.out.print("Harga Obat: ");
+        int hargaObat = scanner.nextInt();
+        System.out.print("Jumlah Stok: ");
+        int jumlahStok = scanner.nextInt();
+        scanner.nextLine();
+
+        StokObat stokObat = new StokObat(namaObat, hargaObat, jumlahStok);
+        daftarStokObat.add(stokObat);
+        System.out.println("Stok obat berhasil ditambahkan.");
+    }
+
+    private void buatResepObat() {
+        System.out.println("\n=== Buat Resep Obat ===");
+        System.out.println("\n=== Semua Pasien ===");
+        for (Pasien pasien : daftarPasien) {
+            System.out.println(pasien);
+        }
+
+        System.out.print("\nPilih ID Pasien: ");
+        String idPasien = scanner.nextLine();
+        Pasien pasienDipilih = null;
+        for (Pasien pasien : daftarPasien) {
+            if (pasien.getId().equals(idPasien)) {
+                pasienDipilih = pasien;
+                break;
+            }
+        }
+
+        if (pasienDipilih == null) {
+            System.out.println("Pasien tidak ditemukan.");
+            return;
+        }
+
+        System.out.println("\n=== Semua Stok Obat ===");
+        for (StokObat stokObat : daftarStokObat) {
+            System.out.println(stokObat);
+        }
+
+        System.out.print("\nPilih Obat: ");
+        String namaObat = scanner.nextLine();
+        StokObat obatDipilih = null;
+        for (StokObat stok : daftarStokObat) {
+            if (stok.getNamaObat().equalsIgnoreCase(namaObat)) {
+                obatDipilih = stok;
+                break;
+            }
+        }
+
+        if (obatDipilih == null) {
+            System.out.println("Obat tidak ditemukan.");
+            return;
+        }
+
+        System.out.print("Jumlah Obat: ");
+        int jumlah = scanner.nextInt();
+        scanner.nextLine();
+
+        Dokter dokter = null;
+        for (JanjiTemu janji : daftarJanjiTemu) {
+            if (janji.getPasien().equals(pasienDipilih)) {
+                dokter = janji.getDokter();
+                break;
+            }
+        }
+
+        if (dokter == null) {
+            System.out.println("Dokter untuk pasien ini tidak ditemukan.");
+            return;
+        }
+
+        ResepObat resepObat = new ResepObat(dokter, obatDipilih.getNamaObat(), String.valueOf(jumlah), "Ambil setelah makan");
+        daftarResepObat.add(resepObat);
+        System.out.println("Resep obat berhasil dibuat.");
+    }
+
+    private void pembayaran() {
+        System.out.println("\n=== Formulir Pembayaran ===");
+        System.out.print("Petugas: ");
+        String petugasName = scanner.nextLine();
+        Karyawan petugas = null;
+        for (Karyawan karyawan : daftarKaryawan) {
+            if (karyawan.getNama().equalsIgnoreCase(petugasName)) {
+                petugas = karyawan;
+                break;
+            }
+        }
+        if (petugas == null) {
+            System.out.println("Petugas tidak ditemukan.");
+            return;
+        }
+
+        System.out.println("\n=== Semua Pasien ===");
+        for (Pasien pasien : daftarPasien) {
+            System.out.println(pasien);
+        }
+
+        System.out.print("\nPilih ID Pasien: ");
+        String idPasien = scanner.nextLine();
+        Pasien pasienDipilih = null;
+        for (Pasien pasien : daftarPasien) {
+            if (pasien.getId().equals(idPasien)) {
+                pasienDipilih = pasien;
+                break;
+            }
+        }
+
+        if (pasienDipilih == null) {
+            System.out.println("Pasien tidak ditemukan.");
+            return;
+        }
+
+        System.out.println("\n=== Semua Stok Obat ===");
+        for (StokObat stok : daftarStokObat) {
+            System.out.println(stok);
+        }
+
+        System.out.print("\nPilih Obat: ");
+        String obatDipilih = scanner.nextLine();
+        StokObat stokObatDipilih = null;
+        for (StokObat stok : daftarStokObat) {
+            if (stok.getNamaObat().equalsIgnoreCase(obatDipilih)) {
+                stokObatDipilih = stok;
+                break;
+            }
+        }
+
+        if (stokObatDipilih == null) {
+            System.out.println("Obat tidak ditemukan.");
+            return;
+        }
+
+        System.out.println("\n=== Pembayaran ===");
+        System.out.println("1. Cash");
+        System.out.println("2. Transfer");
+        System.out.println("3. Qris");
+        System.out.print("Masukkan jenis pembayaran: ");
+        int pembayaran = scanner.nextInt();
+        scanner.nextLine();
+
+        String metodePembayaran = "";
+        switch (pembayaran) {
+            case 1:
+                metodePembayaran = "Cash";
+                break;
+            case 2:
+                metodePembayaran = "Transfer";
+                break;
+            case 3:
+                metodePembayaran = "Qris";
+                break;
+            default:
+                System.out.println("Pilihan pembayaran tidak valid.");
+                return;
+        }
+
+        System.out.println("=== Data Pasien ===");
+        System.out.println("Pasien: " + pasienDipilih.getNama());
+        System.out.println("Obat: " + stokObatDipilih.getNamaObat());
+        System.out.println("Harga: " + stokObatDipilih.getHargaObat());
+        System.out.println("Pembayaran: " + metodePembayaran);
+        System.out.println("Petugas: " + petugas.getNama());
     }
 }
