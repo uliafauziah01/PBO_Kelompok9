@@ -5,12 +5,18 @@ public class PendapatanKlinik {
         this.pendapatan = 0;
     }
 
-    public void tambahPendapatan(double jumlah) {
+    public void addPendapatan(double jumlah) {
         this.pendapatan += jumlah;
     }
 
-    public double getPendapatan() {
-        return pendapatan;
+    public double getTotalPendapatan() {
+        return this.pendapatan;
+    }
+
+    public void prosesPembayaran(double harga, String jenisPembayaran) {
+        addPendapatan(harga);
+        System.out.println("Pembayaran berhasil dengan jenis pembayaran: " + jenisPembayaran);
+        System.out.println("Total Pendapatan Klinik: Rp " + pendapatan);
     }
 
     @Override
