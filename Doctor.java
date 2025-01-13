@@ -1,18 +1,25 @@
-public class Dokter {
-    String id;
-    String nama;
-    String spesialisasi;
-    String jadwalPraktek;
+import java.util.Map;
 
-    public Dokter(String id, String nama, String spesialisasi, String jadwalPraktek) {
-        this.id = id;
-        this.nama = nama;
+public class Dokter extends Person {
+    private String spesialisasi;
+    private Map<String, String> jadwalPraktek;
+
+    public Dokter(String id, String nama, String spesialisasi, Map<String, String> jadwalPraktek) {
+        super(id, nama); 
         this.spesialisasi = spesialisasi;
         this.jadwalPraktek = jadwalPraktek;
     }
 
+    public String getSpesialisasi() {
+        return spesialisasi;
+    }
+
+    public Map<String, String> getJadwalPraktek() {
+        return jadwalPraktek;
+    }
+
     @Override
     public String toString() {
-        return "Kode Dokter: " + id + "\nNama Dokter: " + nama + "\nSpesialisasi: " + spesialisasi + "\nJadwal Praktek: " + jadwalPraktek;
+        return super.toString() + ", Spesialisasi: " + spesialisasi;
     }
 }
